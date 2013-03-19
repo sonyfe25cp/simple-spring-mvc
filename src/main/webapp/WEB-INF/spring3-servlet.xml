@@ -11,45 +11,9 @@
            http://www.springframework.org/schema/mvc 
            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
 	default-autowire="byName">
+
+    <context:component-scan base-package="sample"/>
     
-    
-    <mvc:resources mapping="/css/**" location="/css/" />
-    <mvc:resources mapping="/images/**" location="/images/" />
-    <mvc:resources mapping="/js/**" location="/js/" />
-
-	<!-- scan for controllers -->
-	<context:component-scan base-package="sample" />
-
-	<!-- InternalResourceViewResolver默认的就是JstlView所以这里就不用配置viewClass了 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/pages"></property>
-		<property name="suffix" value=".jsp"></property>
-	</bean>
-
-	<!-- Handler Mapping -->
-	
-	
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-		
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<!-- 配置一下对json数据的转换 -->
-		<property name="messageConverters">
-		    
-			<list>
-				<bean
-					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
-			</list>
-		</property>
-	</bean>
-	
-	
-    <!-- 上传拦截，如最大上传值及最小上传值 
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="100000000" />
-	</bean>
-	-->
+    <!-- Handler Mapping -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 </beans>
